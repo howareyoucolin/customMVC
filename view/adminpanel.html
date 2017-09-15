@@ -1,0 +1,42 @@
+<h1>ADMIN PAGE</h1>
+<h4>User List(Click on the user to view his/her uploaded images)</h4>
+
+<form action="adminpanel" method="post">
+	<p>Please select to show the user's uploaded images:</p>
+	<?php if(!isset($this->data['list'])){ ?>
+		<?php foreach($this->data['users'] as $user){ ?>
+		<?php echo $user['user'];?> <input type="checkbox" checked name="list[]" value="<?php echo $user['id'];?>" /> <br />
+		<?php } ?>
+	<?php } else { ?>
+		<?php foreach($this->data['users'] as $user){ ?>
+		<?php echo $user['user'];?> <input type="checkbox" <?php echo (in_array($user['id'],$this->data['list']))?'checked':'';?> name="list[]" value="<?php echo $user['id'];?>" /> <br />
+		<?php } ?>
+	<?php } ?>
+	<input type="submit" value="show"/>
+</form>
+
+<h2>images</h2>
+<ul>
+<?php foreach($this->data['images'] as $image){ ?>
+	<li style="float:left;margin:10px;">
+		<img src="<?php echo $image['link'];?>" width="150" height="150" border="0" /><br/>
+		<p><a href="shiftownership/<?php echo $image['img_id'];?>">[SHIFT OWNERSHIP]</a></p>
+		<p><?php echo $image['user'];?>/<?php echo $image['email'];?></p>
+	</li>
+<?php } ?>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

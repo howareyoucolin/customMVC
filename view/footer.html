@@ -1,0 +1,8 @@
+<?php 
+if(isset($_SESSION['message'])){
+	echo '<h2 style="color:red;">'.$_SESSION['message'].'</h2>';
+	unset($_SESSION['message']);
+}
+?>
+</body>
+</html>

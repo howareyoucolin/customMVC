@@ -1,0 +1,75 @@
+<h1>DASHBOARD(STANDARD USER)</h1>
+<h3>USERNAME:<?php echo $this->user->user;?></h3>
+<h3 id="email">EMAIL:<?php echo (!$this->user->email=='')?$this->user->email:'NO EMAIL';?></h3>
+<a href="javascript:void(0);editEmail();">[EDIT EMAIL HERE]</a>
+<hr/>
+<h2>Upload Image</h2>
+<form action="dashboard/upload" method="post" enctype="multipart/form-data">
+	<label for="file">Filename:</label>
+	<input type="file" name="file" id="file"><br>
+	<input type="submit" name="submit" value="Submit">
+</form>
+<hr/>
+<h2>uploaded Images</h2>
+<form action="dashboard/multiDelete" method="post">
+Select the check boxes below and click this button to multi delete images:<input type="submit" value="MULTI-DELETE"/>
+<ul>
+<?php foreach($this->data['images'] as $image) { ?>
+	<li id="img<?php echo $image['img_id'];?>" style="float:left;margin:10px;">
+		<input type="checkbox" name="delete[]" value="<?php echo $image['img_id'];?>" /><br/>
+		<img src="<?php echo $image['link'];?>" width="150" height="150" border="0" /><br/>
+		<button onclick="deleteIt(<?php echo $image['img_id'];?>);event.preventDefault();">Delete</button>
+	</li>
+<?php } ?>
+<li style="clear:both;">&nbsp;</li>
+</ul>
+</form>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+//delete image
+function deleteIt(id){
+
+	$.ajax({
+	  url: "dashboard/delete",
+	  type: "post",
+	  data: {
+		"id":id,
+		},
+	  success: function(data){
+			if(data == '1'){
+				$('#img'+id).remove();
+			}else{
+				alert('Deletion failed!');
+			}
+	  },
+	  error:function(){
+		//ignore for now
+	  }   
+	}); 
+	
+	
+
+}
+</script>
+
+<script>
+function editEmail(){
+	var email = prompt('Enter your new email here:');
+	$.ajax({
+	  url: "dashboard/changeEmail",
+	  type: "post",
+	  data: {
+		"email":email,
+		},
+	  success: function(data){
+				$('#email').text(data);
+	  },
+	  error:function(){
+		//ignore for now
+	  }   
+	}); 
+}
+</script>

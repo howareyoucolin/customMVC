@@ -1,0 +1,12 @@
+<h2>SHIFT OWNERSHIP PAGE</h2>
+<hr/>
+<img src="<?php echo $this->data['image']['link'];?>" height="150" width="150"/><br/><br/>
+From <?php echo $this->data['image']['user'];?> To: (one click and and shift ownership)<br/>
+
+<?php foreach($this->data['users'] as $user){
+	echo '<a href="shift/'.$this->data['image']['img_id'].'to'.$user['id'].'">'.$user['user'].'</a><br/>';
+}
+?>
+
+<h2><a href="javascript:void(0);history.go(-1);">[GO BACK]</a></h2>
+ 

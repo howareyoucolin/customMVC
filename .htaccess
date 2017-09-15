@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /techexam/
+RewriteRule ^shift/(\d+)to(\d+)$ index.php?action=adminpanel&method=shift&imgid=$1&userid=$2
+RewriteRule ^shiftownership/(\d+)$ index.php?action=adminpanel&method=shiftOwnership&imgid=$1
+RewriteRule ^([a-zA-Z]*)/([a-zA-Z]*)$ index.php?action=$1&method=$2
+RewriteRule ^([a-zA-Z]*)$ index.php?action=$1
+</IfModule> 
